@@ -7,32 +7,20 @@ nav {
     font-size: 0.7em;
     margin-top: 15px;
 }
-
-body {
-    height: 100vh;
-    width: 100vw;
-    background-color: #111111;
-    margin: 0rem;
-    overflow: hidden;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-#imageTrack > .image {
-    width: 35vmin;
-    height: 50vmin;
-    object-fit: cover;
-    object-position: 90% 50%;
-}
-
-#imageTrack {
-    display: flex;
-    gap: 3vmin;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-10%, -50%);
-}
 a {
     text-decoration: none;
     color: #ffffff;
+}
+body {
+    background-color: #111111;
+    color: #ffffff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.section1 {
+    font-size: clamp(1.5rem, 2.5vw, 5rem);
+    display: flex;
+    position: absolute;
+    left: 40%;
+    top: 15%;
+    padding: 0 5vw;
 }
