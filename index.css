@@ -2,7 +2,13 @@ nav a {
     opacity: 0.5;
     transition: opacity 0.3s ease;
 }
-
+html, body {
+    overflow: auto;
+    scrollbar-width: none;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none;
+}
 nav a.active {
     opacity: 1;          /* or font-weight: bold; or color: #aaa; whatever "less transparent" means */
 }
@@ -17,11 +23,9 @@ nav {
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: #111111;
     margin: 0;
-    overflow: hidden;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -46,4 +50,28 @@ body {
 a {
     text-decoration: none;
     color: #ffffff;
+}
+.mySVG {
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+.prints h2 {
+    font-size: 3em;
+    color: #ffffff;
+}
+.first-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+.prints {
+    margin-top: 100vh;
+    display: flex;
 }

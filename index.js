@@ -57,7 +57,7 @@ window.addEventListener('wheel', e => {
     lastWheel = now;
 
     const scrollSpeed = 0.07;
-    const delta = e.deltaY * scrollSpeed;
+    const delta = -e.deltaY * scrollSpeed;
 
     let nextPercentage = parseFloat(track.dataset.prevPercentage || 0) + delta;
     nextPercentage = Math.max(Math.min(nextPercentage, -11), -89);
