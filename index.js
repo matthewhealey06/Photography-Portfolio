@@ -1,84 +1,115 @@
-const track = document.getElementById('imageTrack');
+const track = document.getElementById("imageTrack");
+const images = track.getElementsByClassName("image");
 
-let lastUpdate = 0;
-const MIN_FRAME_TIME = 1000 / 40; 
+/* =========================
+   CONFIG
+========================= */
+const START_PERCENT = -11;
+const END_PERCENT = -89;
+const SCROLL_SPEED = 0.08;
 
-window.onmousedown = e => {
-    track.dataset.mouseDownAt = e.clientX;
-};
+/* =========================
+   STATE
+========================= */
+let currentPercent = START_PERCENT;
+let isDragging = false;
+let dragStartX = 0;
+let dragStartPercent = 0;
 
-window.onmouseup = () => {
-    track.dataset.mouseDownAt = '0';
-    track.dataset.prevPercentage = track.dataset.percentage;
-};
+/* =========================
+   UTILS
+========================= */
+function clamp(val, min, max) {
+    return Math.min(Math.max(val, min), max);
+}
 
-window.onmousemove = e => {
-    if (track.dataset.mouseDownAt === '0') return;
+function applyTransform(percent) {
+    currentPercent = percent;
 
-    const now = performance.now();
-    if (now - lastUpdate < MIN_FRAME_TIME) return; 
-    lastUpdate = now;
+    track.style.transform = `translate(${percent}%, -50%)`;
 
-    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+    const pos = `${100 + percent}% center`;
+    for (const img of images) {
+        img.style.objectPosition = pos;
+    }
+}
+
+/* =========================
+   INITIAL POSITION
+========================= */
+applyTransform(START_PERCENT);
+
+/* =========================
+   WHEEL — HORIZONTAL FIRST
+========================= */
+window.addEventListener(
+    "wheel",
+    e => {
+        const atTop = window.scrollY === 0;
+        const scrollingDown = e.deltaY > 0;
+        const scrollingUp = e.deltaY < 0;
+
+        // Only hijack scroll when we're at the very top
+        if (!atTop) return;
+
+        // Horizontal forward
+        if (scrollingDown && currentPercent > END_PERCENT) {
+            e.preventDefault();
+
+            currentPercent += -e.deltaY * SCROLL_SPEED;
+            currentPercent = clamp(currentPercent, END_PERCENT, START_PERCENT);
+            applyTransform(currentPercent);
+            return;
+        }
+
+        // Horizontal backward
+        if (scrollingUp && currentPercent < START_PERCENT) {
+            e.preventDefault();
+
+            currentPercent += -e.deltaY * SCROLL_SPEED;
+            currentPercent = clamp(currentPercent, END_PERCENT, START_PERCENT);
+            applyTransform(currentPercent);
+            return;
+        }
+
+        // Otherwise: allow normal vertical scroll
+    },
+    { passive: false }
+);
+
+/* =========================
+   MOUSE DRAG
+========================= */
+window.addEventListener("mousedown", e => {
+    isDragging = true;
+    dragStartX = e.clientX;
+    dragStartPercent = currentPercent;
+});
+
+window.addEventListener("mouseup", () => {
+    isDragging = false;
+});
+
+window.addEventListener("mousemove", e => {
+    if (!isDragging) return;
+
+    const deltaX = dragStartX - e.clientX;
     const maxDelta = window.innerWidth / 2;
 
-    const percentage = (mouseDelta / maxDelta) * -100;
-    let nextPercentage = parseFloat(track.dataset.prevPercentage || "0") + percentage;
+    const deltaPercent = (deltaX / maxDelta) * -100;
 
-    nextPercentage = Math.max(Math.min(nextPercentage, -11), -89);
-
-    if (nextPercentage === 0 || nextPercentage === -100) {
-        track.dataset.mouseDownAt = e.clientX;
-        track.dataset.prevPercentage = nextPercentage;
-    }
-
-    track.dataset.percentage = nextPercentage;
-
-    track.animate(
-        { transform: `translate(${nextPercentage}%, -50%)` },
-        { duration: 120, fill: 'forwards' }
+    const next = clamp(
+        dragStartPercent + deltaPercent,
+        END_PERCENT,
+        START_PERCENT
     );
 
-    const pos = `${100 + nextPercentage}% center`;
-    for (const image of track.getElementsByClassName('image')) {
-        image.animate(
-            { objectPosition: pos },
-            { duration: 120, fill: 'forwards' }
-        );
-    }
-};
+    applyTransform(next);
+});
 
-let lastWheel = 0;
-window.addEventListener('wheel', e => {
-    e.preventDefault();
-
-    const now = performance.now();
-    if (now - lastWheel < MIN_FRAME_TIME) return;
-    lastWheel = now;
-
-    const scrollSpeed = 0.07;
-    const delta = -e.deltaY * scrollSpeed;
-
-    let nextPercentage = parseFloat(track.dataset.prevPercentage || 0) + delta;
-    nextPercentage = Math.max(Math.min(nextPercentage, -11), -89);
-
-    track.dataset.percentage = nextPercentage;
-    track.dataset.prevPercentage = nextPercentage;
-
-    track.animate(
-        { transform: `translate(${nextPercentage}%, -50%)` },
-        { duration: 80, fill: 'forwards' }
-    );
-
-    const pos = `${100 + nextPercentage}% center`;
-    for (const image of track.getElementsByClassName('image')) {
-        image.animate(
-            { objectPosition: pos },
-            { duration: 80, fill: 'forwards' }
-        );
-    }
-}, { passive: false });
-
+/* =========================
+   NAV ACTIVE STATE
+========================= */
 document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname.toLowerCase();
     const currentFile = currentPath.split('/').pop() || 'index.html';
@@ -90,12 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const linkHref = link.getAttribute('href').toLowerCase();
         const linkFile = linkHref.split('/').pop(); 
-
         if (
             linkFile === currentFile ||
             (currentFile === '' && linkFile === 'index.html') ||
             (currentFile === 'index.html' && linkFile === '') ||
-            linkFile.includes(currentFile) 
+            linkFile.includes(currentFile)
         ) {
             link.classList.add('active');
         }
