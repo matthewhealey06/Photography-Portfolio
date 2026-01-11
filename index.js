@@ -1,24 +1,15 @@
 const track = document.getElementById("imageTrack");
 const images = track.getElementsByClassName("image");
 
-/* =========================
-   CONFIG
-========================= */
 const START_PERCENT = -11;
 const END_PERCENT = -89;
 const SCROLL_SPEED = 0.08;
 
-/* =========================
-   STATE
-========================= */
 let currentPercent = START_PERCENT;
 let isDragging = false;
 let dragStartX = 0;
 let dragStartPercent = 0;
 
-/* =========================
-   UTILS
-========================= */
 function clamp(val, min, max) {
     return Math.min(Math.max(val, min), max);
 }
@@ -34,14 +25,8 @@ function applyTransform(percent) {
     }
 }
 
-/* =========================
-   INITIAL POSITION
-========================= */
 applyTransform(START_PERCENT);
 
-/* =========================
-   WHEEL — HORIZONTAL FIRST
-========================= */
 window.addEventListener(
     "wheel",
     e => {
@@ -49,10 +34,8 @@ window.addEventListener(
         const scrollingDown = e.deltaY > 0;
         const scrollingUp = e.deltaY < 0;
 
-        // Only hijack scroll when we're at the very top
         if (!atTop) return;
 
-        // Horizontal forward
         if (scrollingDown && currentPercent > END_PERCENT) {
             e.preventDefault();
 
@@ -62,7 +45,6 @@ window.addEventListener(
             return;
         }
 
-        // Horizontal backward
         if (scrollingUp && currentPercent < START_PERCENT) {
             e.preventDefault();
 
@@ -71,15 +53,10 @@ window.addEventListener(
             applyTransform(currentPercent);
             return;
         }
-
-        // Otherwise: allow normal vertical scroll
     },
     { passive: false }
 );
 
-/* =========================
-   MOUSE DRAG
-========================= */
 window.addEventListener("mousedown", e => {
     isDragging = true;
     dragStartX = e.clientX;
@@ -107,9 +84,6 @@ window.addEventListener("mousemove", e => {
     applyTransform(next);
 });
 
-/* =========================
-   NAV ACTIVE STATE
-========================= */
 document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname.toLowerCase();
     const currentFile = currentPath.split('/').pop() || 'index.html';
@@ -130,4 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
         }
     });
+});
+document.querySelector('.mySVG').addEventListener('click', () => {
+    const prints = document.getElementById('prints');
+    const animationSpeed = 6; // adjust for faster/slower
+
+    function animateHorizontal() {
+        if (currentPercent > END_PERCENT) {
+            currentPercent -= animationSpeed;
+            currentPercent = clamp(currentPercent, END_PERCENT, START_PERCENT);
+            applyTransform(currentPercent);
+            requestAnimationFrame(animateHorizontal);
+        } else {
+            // Horizontal animation fully done
+            const offset = prints.getBoundingClientRect().top + window.scrollY - 80; 
+            // Trigger vertical scroll only once
+            window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+    }
+
+    animateHorizontal();
 });
