@@ -16,7 +16,7 @@ window.onmousemove = e => {
     const percentage = (mouseDelta / maxDelta) * -100;
     let nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
 
-    nextPercentage = Math.max(Math.min(nextPercentage, -12), -88);
+    nextPercentage = Math.max(Math.min(nextPercentage, -10), -90);
 
     if (nextPercentage === 0 || nextPercentage === -100) {
     track.dataset.mouseDownAt = e.clientX
@@ -44,7 +44,7 @@ window.addEventListener('wheel', e => {
     let nextPercentage =
         parseFloat(track.dataset.prevPercentage || 0) + delta;
 
-    nextPercentage = Math.max(Math.min(nextPercentage, -12), -88);
+    nextPercentage = Math.max(Math.min(nextPercentage, -10), -90);
 
     track.dataset.percentage = nextPercentage;
     track.dataset.prevPercentage = nextPercentage;
