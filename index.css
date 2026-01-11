@@ -1,3 +1,11 @@
+nav a {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+nav a.active {
+    opacity: 1;          /* or font-weight: bold; or color: #aaa; whatever "less transparent" means */
+}
 nav {
     display: flex;
     color: #ffffff;
@@ -12,25 +20,28 @@ body {
     height: 100vh;
     width: 100vw;
     background-color: #111111;
-    margin: 0rem;
+    margin: 0;
     overflow: hidden;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#imageTrack {
+    display: flex;
+    gap: 2.5vmin;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-11%, -50%);   
+    will-change: transform;
 }
 
 #imageTrack > .image {
     width: 35vmin;
     height: 50vmin;
     object-fit: cover;
+    transform: translateZ(0);
+    will-change: transform;
     object-position: 90% 50%;
-}
-
-#imageTrack {
-    display: flex;
-    gap: 3vmin;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-10%, -50%);
 }
 a {
     text-decoration: none;
