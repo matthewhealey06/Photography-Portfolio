@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.querySelector('.mySVG').addEventListener('click', () => {
     const prints = document.getElementById('prints');
-    const animationSpeed = 6; // adjust for faster/slower
+    const animationSpeed = 6;
 
     function animateHorizontal() {
         if (currentPercent > END_PERCENT) {
@@ -116,9 +116,7 @@ document.querySelector('.mySVG').addEventListener('click', () => {
             applyTransform(currentPercent);
             requestAnimationFrame(animateHorizontal);
         } else {
-            // Horizontal animation fully done
             const offset = prints.getBoundingClientRect().top + window.scrollY - 80; 
-            // Trigger vertical scroll only once
             window.scrollTo({ top: offset, behavior: 'smooth' });
         }
     }
