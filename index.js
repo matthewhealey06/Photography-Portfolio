@@ -3,7 +3,7 @@ const images = track.getElementsByClassName("image");
 
 const START_PERCENT = -11;
 const END_PERCENT = -89;
-const SCROLL_SPEED = 0.08;
+const SCROLL_SPEED = 0.05;
 
 let currentPercent = START_PERCENT;
 let isDragging = false;
