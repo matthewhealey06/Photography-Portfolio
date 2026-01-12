@@ -28,7 +28,7 @@ body.loading {
 #content {
   visibility: hidden;
 }
-
+-----------
 html, body {
     margin: 0;
     padding: 0;
@@ -74,6 +74,37 @@ nav {
     height: 100vh;
     position: relative;
 }
+.image-container {
+    position: relative;
+    width: 35vmin;        /* same as your old image width */
+    height: 50vmin;       /* same as your old image height */
+    flex-shrink: 0;       /* prevent shrinking in flex layout */
+    overflow: hidden;     /* crop anything that goes outside */
+}
+
+.image-container .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 90% 50%; /* keep your original object position */
+}
+.image-container .caption {
+    position: absolute;
+    bottom: 5%;           /* small margin from bottom */
+    left: 5%;             /* small margin from left */
+    color: #ffffff;
+    font-size: 1em;
+    opacity: 0;           /* hidden by default */
+    transition: opacity 0.3s ease;
+    background-color: rgba(0,0,0,0.5); /* subtle background for readability */
+    padding: 0.3em 0.5em;
+    border-radius: 3px;
+    pointer-events: none; /* so it doesn’t block hover */
+}
+
+.image-container:hover .caption {
+    opacity: 1;           /* show on hover */
+}
 
 #imageTrack {
     display: flex;
@@ -81,7 +112,7 @@ nav {
     position: absolute;
     left: 50%;
     top: 45%;
-    transform: translate(-11%, -55%);
+    transform: translate(-7%, -55%);
     will-change: transform;
 }
 

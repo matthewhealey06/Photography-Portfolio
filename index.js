@@ -1,8 +1,8 @@
 const track = document.getElementById("imageTrack");
 const images = track.getElementsByClassName("image");
 
-const START_PERCENT = -11;
-const END_PERCENT = -89;
+const START_PERCENT = -8;
+const END_PERCENT = -92;
 const SCROLL_SPEED = 0.05;
 
 let currentPercent = START_PERCENT;
