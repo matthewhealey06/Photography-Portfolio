@@ -1,11 +1,26 @@
+const CONFIG = {
+    TRACK: {
+        START_PERCENT: -8,
+        END_PERCENT: -92,
+        VERTICAL_OFFSET: -50
+    },
+    SCROLL: {
+        SPEED: 0.05
+    },
+    DRAG: {
+        MAX_DELTA_DIVISOR: 2,
+        PERCENT_MULTIPLIER: -100
+    },
+    ANIMATION: {
+        HORIZONTAL_SPEED: 6,
+        SCROLL_OFFSET: 80
+    }
+};
+
 const track = document.getElementById("imageTrack");
 const images = track.getElementsByClassName("image");
 
-const START_PERCENT = -8;
-const END_PERCENT = -92;
-const SCROLL_SPEED = 0.05;
-
-let currentPercent = START_PERCENT;
+let currentPercent = CONFIG.TRACK.START_PERCENT;
 let isDragging = false;
 let dragStartX = 0;
 let dragStartPercent = 0;
@@ -17,7 +32,8 @@ function clamp(val, min, max) {
 function applyTransform(percent) {
     currentPercent = percent;
 
-    track.style.transform = `translate(${percent}%, -50%)`;
+    track.style.transform =
+        `translate(${percent}%, ${CONFIG.TRACK.VERTICAL_OFFSET}%)`;
 
     const pos = `${100 + percent}% center`;
     for (const img of images) {
@@ -25,37 +41,28 @@ function applyTransform(percent) {
     }
 }
 
-applyTransform(START_PERCENT);
+applyTransform(CONFIG.TRACK.START_PERCENT);
 
-window.addEventListener(
-    "wheel",
-    e => {
-        const atTop = window.scrollY === 0;
-        const scrollingDown = e.deltaY > 0;
-        const scrollingUp = e.deltaY < 0;
+window.addEventListener("wheel", e => {
+    if (window.scrollY !== 0) return;
 
-        if (!atTop) return;
+    const next =
+        currentPercent + -e.deltaY * CONFIG.SCROLL.SPEED;
 
-        if (scrollingDown && currentPercent > END_PERCENT) {
-            e.preventDefault();
-
-            currentPercent += -e.deltaY * SCROLL_SPEED;
-            currentPercent = clamp(currentPercent, END_PERCENT, START_PERCENT);
-            applyTransform(currentPercent);
-            return;
-        }
-
-        if (scrollingUp && currentPercent < START_PERCENT) {
-            e.preventDefault();
-
-            currentPercent += -e.deltaY * SCROLL_SPEED;
-            currentPercent = clamp(currentPercent, END_PERCENT, START_PERCENT);
-            applyTransform(currentPercent);
-            return;
-        }
-    },
-    { passive: false }
-);
+    if (
+        (e.deltaY > 0 && currentPercent > CONFIG.TRACK.END_PERCENT) ||
+        (e.deltaY < 0 && currentPercent < CONFIG.TRACK.START_PERCENT)
+    ) {
+        e.preventDefault();
+        applyTransform(
+            clamp(
+                next,
+                CONFIG.TRACK.END_PERCENT,
+                CONFIG.TRACK.START_PERCENT
+            )
+        );
+    }
+}, { passive: false });
 
 window.addEventListener("mousedown", e => {
     isDragging = true;
@@ -71,18 +78,47 @@ window.addEventListener("mousemove", e => {
     if (!isDragging) return;
 
     const deltaX = dragStartX - e.clientX;
-    const maxDelta = window.innerWidth / 2;
+    const maxDelta =
+        window.innerWidth / CONFIG.DRAG.MAX_DELTA_DIVISOR;
 
-    const deltaPercent = (deltaX / maxDelta) * -100;
+    const deltaPercent =
+        (deltaX / maxDelta) * CONFIG.DRAG.PERCENT_MULTIPLIER;
 
-    const next = clamp(
-        dragStartPercent + deltaPercent,
-        END_PERCENT,
-        START_PERCENT
+    applyTransform(
+        clamp(
+            dragStartPercent + deltaPercent,
+            CONFIG.TRACK.END_PERCENT,
+            CONFIG.TRACK.START_PERCENT
+        )
     );
-
-    applyTransform(next);
 });
+
+document.querySelector('.mySVG').addEventListener('click', () => {
+    const prints = document.getElementById('prints');
+
+    function animateHorizontal() {
+        if (currentPercent > CONFIG.TRACK.END_PERCENT) {
+            applyTransform(
+                clamp(
+                    currentPercent - CONFIG.ANIMATION.HORIZONTAL_SPEED,
+                    CONFIG.TRACK.END_PERCENT,
+                    CONFIG.TRACK.START_PERCENT
+                )
+            );
+            requestAnimationFrame(animateHorizontal);
+        } else {
+            const offset =
+                prints.getBoundingClientRect().top +
+                window.scrollY -
+                CONFIG.ANIMATION.SCROLL_OFFSET;
+
+            window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+    }
+
+    animateHorizontal();
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname.toLowerCase();
@@ -107,16 +143,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.querySelector('.mySVG').addEventListener('click', () => {
     const prints = document.getElementById('prints');
-    const animationSpeed = 6;
+    const speed = CONFIG.ANIMATION.HORIZONTAL_SPEED;
 
     function animateHorizontal() {
         if (currentPercent > END_PERCENT) {
-            currentPercent -= animationSpeed;
+            currentPercent -= speed;
             currentPercent = clamp(currentPercent, END_PERCENT, START_PERCENT);
             applyTransform(currentPercent);
             requestAnimationFrame(animateHorizontal);
         } else {
-            const offset = prints.getBoundingClientRect().top + window.scrollY - 80; 
+            const offset = prints.getBoundingClientRect().top + window.scrollY - CONFIG; 
             window.scrollTo({ top: offset, behavior: 'smooth' });
         }
     }

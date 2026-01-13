@@ -28,7 +28,7 @@ body.loading {
 #content {
   visibility: hidden;
 }
------------
+/* --------------------------------- */
 html, body {
     margin: 0;
     padding: 0;
@@ -76,34 +76,34 @@ nav {
 }
 .image-container {
     position: relative;
-    width: 35vmin;        /* same as your old image width */
-    height: 50vmin;       /* same as your old image height */
-    flex-shrink: 0;       /* prevent shrinking in flex layout */
-    overflow: hidden;     /* crop anything that goes outside */
+    width: 35vmin;
+    height: 50vmin;
+    flex-shrink: 0;
+    overflow: hidden;
 }
 
 .image-container .image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 90% 50%; /* keep your original object position */
+    object-position: 90% 50%;
 }
 .image-container .caption {
     position: absolute;
-    bottom: 5%;           /* small margin from bottom */
-    left: 5%;             /* small margin from left */
+    bottom: 5%;
+    left: 5%;
     color: #ffffff;
     font-size: 1em;
-    opacity: 0;           /* hidden by default */
+    opacity: 0;
     transition: opacity 0.3s ease;
-    background-color: rgba(0,0,0,0.5); /* subtle background for readability */
+    background-color: rgba(0,0,0,0.5);
     padding: 0.3em 0.5em;
     border-radius: 3px;
-    pointer-events: none; /* so it doesn’t block hover */
+    pointer-events: none;
 }
 
 .image-container:hover .caption {
-    opacity: 1;           /* show on hover */
+    opacity: 1;
 }
 
 #imageTrack {
@@ -115,15 +115,6 @@ nav {
     transform: translate(-7%, -55%);
     will-change: transform;
 }
-
-#imageTrack > .image {
-    width: 35vmin;
-    height: 50vmin;
-    object-fit: cover;
-    will-change: transform;
-    object-position: 90% 50%;
-}
-
 .mySVG {
     color: #ffffff;
     width: 50px;
