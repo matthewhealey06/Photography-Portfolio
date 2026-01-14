@@ -1,0 +1,105 @@
+body {
+    margin-top: 100px;
+    background-color: #222222;
+    color: #ffffff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+nav a {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+nav a.active {
+    opacity: 1;                      
+}
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    padding: 1rem 0;
+}
+
+.print-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+#print-image {
+  width: auto;
+  height: 75vh;
+  max-height: 750px;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+
+.print-info {
+  margin-top: 2rem;
+  display: flex;
+}
+.print-text{
+    flex: 1;
+}
+#print-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#print-description {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
+  max-width: 33vw;
+  margin-right: 1rem;
+}
+
+.print-purchase .price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.print-purchase .sizes button {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1rem;
+  margin: 0.2rem 0.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 6px;
+  ;
+}
+
+.print-purchase .sizes button:hover {
+  background: #eee;
+}
+.checkout {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 0.6rem 2rem;
+  margin: 0 0.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 6px;
+  margin-top: 5px;
+  text-align: center;
+}
+button {
+    all: unset;
+    box-sizing: border-box;
+}
