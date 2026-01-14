@@ -8,7 +8,8 @@ const CONFIG = {
         SPEED: 0.05
     },
     DRAG: {
-        MAX_DELTA_DIVISOR: 2,
+        MOUSE_DIVISOR: 2,
+        TOUCH_DIVISOR: 1,
         PERCENT_MULTIPLIER: -100
     },
     ANIMATION: {
@@ -21,9 +22,11 @@ const track = document.getElementById("imageTrack");
 const images = track.getElementsByClassName("image");
 
 let currentPercent = CONFIG.TRACK.START_PERCENT;
+let dragDivisor = CONFIG.DRAG.MOUSE_DIVISOR;
 let isDragging = false;
 let dragStartX = 0;
 let dragStartPercent = 0;
+
 
 function clamp(val, min, max) {
     return Math.min(Math.max(val, min), max);
@@ -79,7 +82,7 @@ window.addEventListener("mousemove", e => {
 
     const deltaX = dragStartX - e.clientX;
     const maxDelta =
-        window.innerWidth / CONFIG.DRAG.MAX_DELTA_DIVISOR;
+        window.innerWidth / CONFIG.DRAG.MOUSE_DIVISOR;
 
     const deltaPercent =
         (deltaX / maxDelta) * CONFIG.DRAG.PERCENT_MULTIPLIER;
@@ -158,4 +161,31 @@ document.querySelector('.mySVG').addEventListener('click', () => {
     }
 
     animateHorizontal();
+});
+window.addEventListener("touchstart", e => {
+  isDragging = true;
+  dragStartX = e.touches[0].clientX;
+  dragStartPercent = currentPercent;
+}, { passive: true });
+
+window.addEventListener("touchmove", e => {
+  if (!isDragging) return;
+
+  const deltaX = dragStartX - e.touches[0].clientX;
+  const maxDelta = window.innerWidth / CONFIG.DRAG.TOUCH_DIVISOR;
+
+  const deltaPercent =
+    (deltaX / maxDelta) * CONFIG.DRAG.PERCENT_MULTIPLIER;
+
+  applyTransform(
+    clamp(
+      dragStartPercent + deltaPercent,
+      CONFIG.TRACK.END_PERCENT,
+      CONFIG.TRACK.START_PERCENT
+    )
+  );
+}, { passive: true });
+
+window.addEventListener("touchend", () => {
+  isDragging = false;
 });

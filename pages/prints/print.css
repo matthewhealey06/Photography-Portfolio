@@ -1,4 +1,9 @@
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
 body {
+    overflow-x: hidden;
     margin-top: 100px;
     background-color: #1b1b1b;
     color: #ffffff;
@@ -31,106 +36,119 @@ nav {
 }
 
 .print-page {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
 }
 
 #print-image {
-  width: auto;
-  height: 75vh;
-  max-height: 750px;
-  border-radius: 4px;
-  display: block;
-  margin: 0 auto;
+    max-width: 95%;
+    max-height: 75vh;
+    width: auto;
+    height: auto;
+    max-height: 750px;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
 }
 
 .print-info {
-  margin-top: 2rem;
-  display: flex;
+    margin-top: 2rem;
+    display: flex;
 }
 .print-text{
     flex: 1;
 }
 #print-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
 #print-description {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-  opacity: 0.85;
-  max-width: 33vw;
-  margin-right: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.85;
+    max-width: 33vw;
+    margin-right: 1rem;
 }
 
 .print-purchase .price {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
 }
 
-.print-purchase .sizes button {
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 0.6rem 1rem;
-  margin: 0.2rem 0.2rem;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 6px;
-  ;
+.print-purchase button {
+    flex: 1;
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 0.6rem 1rem;
+    margin: 0.2rem 0.2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 6px;
 }
 
 .print-purchase .sizes button:hover {
-  background: #eee;
+    background: #eee;
+}
+.print-purchase .sizes {
+    display: flex;
+    width: 100%;
+}
+.print-purchase{
+    flex: 1;
 }
 .checkout {
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 0.6rem 2rem;
-  margin: 0 0.2rem;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 6px;
-  margin-top: 5px;
-  text-align: center;
+    background: #fff;
+    margin: 0 0.2rem;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-top: 5px;
+    text-align: center;
 }
 button {
     all: unset;
     box-sizing: border-box;
 }
 .print-image-section {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  display: inline-block; /* or block if you want full-width */
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: block;
 }
 #print-image {
     display: block;
-    max-width: 100%;
 }
 .nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  height: 10vh;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    height: 10vh;
 }
 .nav-btn img {
     height: 66px;
 }
 .nav-btn.left {
-  left: -15vw; /* adjust distance from image */;
+    left: -40px; /* adjust distance from image */
 }
 
 .nav-btn.right {
-  right: -15vw; /* adjust distance from image */
+    right: -40px; /* adjust distance from image */
+}
+@media(max-width:765px) {
+    .print-info{
+        display: flex;
+        flex-direction: column;
+    }
+    #print-description{
+        max-width: 100%;
+    }
 }
