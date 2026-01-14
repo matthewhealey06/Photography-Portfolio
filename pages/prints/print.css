@@ -1,6 +1,6 @@
 body {
     margin-top: 100px;
-    background-color: #222222;
+    background-color: #1b1b1b;
     color: #ffffff;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -102,4 +102,35 @@ nav {
 button {
     all: unset;
     box-sizing: border-box;
+}
+.print-image-section {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  display: inline-block; /* or block if you want full-width */
+}
+#print-image {
+    display: block;
+    max-width: 100%;
+}
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  height: 10vh;
+}
+.nav-btn img {
+    height: 66px;
+}
+.nav-btn.left {
+  left: -15vw; /* adjust distance from image */;
+}
+
+.nav-btn.right {
+  right: -15vw; /* adjust distance from image */
 }
