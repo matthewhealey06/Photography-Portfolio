@@ -69,6 +69,68 @@ nav {
     font-size: 0.7em;
     padding: 1rem 0;
 }
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.hero h1, .hero p {
+    display: flex;
+    position: absolute;
+    z-index: 999;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.hero h1 {
+    top: 40%;
+    font-size: 3em;
+}
+.hero p {
+    top: 50%;
+}
+.hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.hero img.active {
+    opacity: 1;
+}
+
+/* Optional: Add navigation dots */
+.hero-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.hero-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-dot.active {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.2);
+}
+
+.hero-dot:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
 
 .horizontal-scroll {
     height: 100vh;
@@ -128,9 +190,9 @@ nav {
     color: #ffffff;
     width: 50px;
     height: 50px;
-    position: absolute;
+    position: relative;
+    bottom: 20vh;
     left: 50%;
-    bottom: 10vh;
     transform: translateX(-50%);
     cursor: pointer;
     z-index: 5;
