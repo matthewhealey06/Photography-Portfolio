@@ -7,7 +7,8 @@ const CONFIG = {
     SCROLL: {
         SPEED: 0.05,
         HERO_BOTTOM_OFFSET: 0,
-        SECTION_TOP_OFFSET: -50
+        SECTION_TOP_OFFSET: -50,
+        LOCK_RELEASE_DELAY_MS: 400
     },
     DRAG: {
         MOUSE_DIVISOR: 2,
@@ -150,7 +151,7 @@ window.addEventListener("wheel", e => {
         scrollLockTimeout = setTimeout(() => {
             isHorizontalActive = false;
             unfreezeVerticalScroll();
-        }, 300);
+        }, CONFIG.SCROLL.LOCK_RELEASE_DELAY_MS);
 
         applyTransform(clamp(next, CONFIG.TRACK.END_PERCENT, CONFIG.TRACK.START_PERCENT));
     } else {
