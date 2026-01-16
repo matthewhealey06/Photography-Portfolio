@@ -2,7 +2,10 @@ const CONFIG = {
     TRACK: {
         START_PERCENT: -8,
         END_PERCENT: -92,
-        VERTICAL_OFFSET: -50
+        VERTICAL_OFFSET: -50,
+        SMALL_SCREEN_BREAKPOINT: 768,
+        SMALL_SCREEN_OFFSET: 10,
+        TOUCH_ZONE: 200 // pixels above/below image to allow drag on mobile
     },
     SCROLL: {
         SPEED: 0.05,
@@ -98,7 +101,14 @@ function applyTransform(percent) {
     track.style.transform =
         `translate(${percent}%, ${CONFIG.TRACK.VERTICAL_OFFSET}%)`;
 
-    const pos = `${100 + percent}% center`;
+    let horizontalPos = 100 + percent;
+
+    // Adjust for smaller screens
+    if (window.innerWidth <= CONFIG.TRACK.SMALL_SCREEN_BREAKPOINT) {
+        horizontalPos = horizontalPos - CONFIG.TRACK.SMALL_SCREEN_OFFSET;
+    }
+
+    const pos = `${horizontalPos}% center`;
     for (const img of images) {
         img.style.objectPosition = pos;
     }
@@ -124,20 +134,22 @@ window.addEventListener("wheel", e => {
         const heroPastThreshold = heroRect.bottom <= CONFIG.SCROLL.HERO_BOTTOM_OFFSET;
         const sectionFarEnoughDown = horizontalRect.top >= CONFIG.SCROLL.SECTION_TOP_OFFSET;
         const horizontalVisible = horizontalRect.top < window.innerHeight && horizontalRect.bottom > 0;
-        shouldActivate = heroPastThreshold && sectionFarEnoughDown && horizontalVisible;
+    shouldActivate =
+        heroPastThreshold &&
+        horizontalVisible &&
+        (isHorizontalActive || sectionFarEnoughDown);
     }
 
     if (isHorizontalActive) shouldActivate = true;
 
     if (!shouldActivate) {
         isHorizontalActive = false;
-        unfreezeVerticalScroll(); // Make sure vertical scroll unlocks
+        unfreezeVerticalScroll();
         return;
     }
 
     const next = currentPercent + -e.deltaY * CONFIG.SCROLL.SPEED;
 
-    // Lock horizontal scroll & freeze vertical scroll when inside track
     if (
         (e.deltaY > 0 && currentPercent > CONFIG.TRACK.END_PERCENT) ||
         (e.deltaY < 0 && currentPercent < CONFIG.TRACK.START_PERCENT)
@@ -184,16 +196,31 @@ window.addEventListener("mousemove", e => {
 });
 
 // =====================================================
-// Touch Drag
+// Touch Drag (Mobile Restriction)
 // =====================================================
+let touchActive = false;
+
 window.addEventListener("touchstart", e => {
-    isDragging = true;
-    dragStartX = e.touches[0].clientX;
-    dragStartPercent = currentPercent;
+    const touchY = e.touches[0].clientY;
+    touchActive = false;
+
+    for (const img of images) {
+        const rect = img.getBoundingClientRect();
+        if (touchY >= rect.top - CONFIG.TRACK.TOUCH_ZONE && touchY <= rect.bottom + CONFIG.TRACK.TOUCH_ZONE) {
+            touchActive = true;
+            break;
+        }
+    }
+
+    if (touchActive) {
+        isDragging = true;
+        dragStartX = e.touches[0].clientX;
+        dragStartPercent = currentPercent;
+    }
 }, { passive: true });
 
 window.addEventListener("touchmove", e => {
-    if (!isDragging) return;
+    if (!isDragging || !touchActive) return;
 
     const deltaX = dragStartX - e.touches[0].clientX;
     const maxDelta = window.innerWidth / CONFIG.DRAG.TOUCH_DIVISOR;
@@ -204,6 +231,7 @@ window.addEventListener("touchmove", e => {
 
 window.addEventListener("touchend", () => {
     isDragging = false;
+    touchActive = false;
 });
 
 // =====================================================
@@ -247,4 +275,72 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
         }
     });
+});
+// Select elements
+const containers = document.querySelectorAll('.image-container');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-image');
+const lbTitle = document.getElementById('lb-title');
+
+let currentIndex = 0;
+let clickAllowed = true;
+
+// Prevent click immediately after dragging
+window.addEventListener('mousedown', () => clickAllowed = true);
+window.addEventListener('mousemove', () => clickAllowed = false);
+
+// Open lightbox when clicking an image
+containers.forEach((container, index) => {
+  container.addEventListener('click', () => {
+    if (!clickAllowed) return;
+
+    currentIndex = index;
+    openLightbox();
+  });
+});
+
+function openLightbox() {
+  const container = containers[currentIndex];
+
+  // Set the full-size image
+  lbImg.src = container.dataset.full;
+
+  // Set the title text
+  lbTitle.textContent = container.dataset.title;
+
+  // ✅ Set the link dynamically using data-gallery
+  lbTitle.href = `/pages/gallery/gallery.html?gallery=${container.dataset.gallery}`;
+
+  // Show lightbox
+  lightbox.classList.add('active');
+  freezeVerticalScroll();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  unfreezeVerticalScroll();
+}
+
+// Navigate images
+function nextImage() {
+  currentIndex = (currentIndex + 1) % containers.length;
+  openLightbox();
+}
+
+function prevImage() {
+  currentIndex = (currentIndex - 1 + containers.length) % containers.length;
+  openLightbox();
+}
+
+// Button events
+document.getElementById('lb-close').onclick = closeLightbox;
+document.getElementById('lb-next').onclick = nextImage;
+document.getElementById('lb-prev').onclick = prevImage;
+
+// Keyboard navigation
+window.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') nextImage();
+  if (e.key === 'ArrowLeft') prevImage();
 });

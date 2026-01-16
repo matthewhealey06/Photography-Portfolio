@@ -82,6 +82,7 @@ nav {
     z-index: 999;
     left: 50%;
     transform: translateX(-50%);
+    white-space: nowrap;
 }
 .hero h1 {
     top: 40%;
@@ -89,6 +90,11 @@ nav {
 }
 .hero p {
     top: 50%;
+}
+@media (max-width: 450px){
+    .hero h1{
+        font-size: calc(100vw / 10)
+    }
 }
 .hero img {
     position: absolute;
@@ -178,12 +184,15 @@ nav {
     will-change: transform;
 }
 
-#imageTrack > .image {
-    width: 35vmin;
-    height: 50vmin;
-    object-fit: cover;
-    will-change: transform;
-    object-position: 90% 50%;
+
+@media (max-width:700px){
+    .image-container{
+        height: 30vh;
+        width: 40vw;
+    }
+    .image-container .image{
+        object-position: 75% center;
+    }
 }
 
 .mySVG {
@@ -198,114 +207,168 @@ nav {
     z-index: 5;
 }
 
-        /* Prints Section */
-         .prints {
-            min-height: var(--viewport-height);
-            padding: 6rem var(--prints-padding-horizontal) 4rem;
-            background-color: var(--color-background);
-            margin-top: 50px;
+/* Prints Section */
+.prints {
+    min-height: var(--viewport-height);
+    padding: 6rem var(--prints-padding-horizontal) 4rem;
+    background-color: var(--color-background);
+    margin-top: 50px;
+}
+.prints-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+.prints-header h2 {
+    font-size: 2.2em;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+.prints-header p {
+    font-size: 1.2em;
+    opacity: 0.7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.prints-grid-1 {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+@media(max-width: 1100px) {
+    .prints-grid-1 {
+        grid-template-columns: repeat(2, 1fr);
         }
-
-        .prints-header {
-            text-align: center;
-            margin-bottom: 4rem;
+    }
+    @media(max-width: 600px) {
+    .prints-grid-1 {
+        grid-template-columns: 1fr;
         }
-
-        .prints-header h2 {
-            font-size: 2.2em;
-            margin-bottom: 1rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .prints-header p {
-            font-size: 1.2em;
-            opacity: 0.7;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .prints-grid-1 {
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        @media(max-width: 1100px) {
-            .prints-grid-1 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media(max-width: 600px) {
-            .prints-grid-1 {
-                grid-template-columns: 1fr;
-            }
-        }
-        .print-card {
-            position: relative;
-            overflow: hidden;
-            background-color: #1a1a1a;
-            border: 1px solid var(--color-border);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-
-        .print-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-accent);
-        }
-
-        .print-image-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 133.33%;
-            overflow: hidden;
-            background-color: #000;
-        }
-
-        .print-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .print-card:hover .print-image {
-            transform: scale(1.05);
-        }
-
-        .print-title-wrapper {
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .print-title {
-            font-size: 1.3em;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin: 0;
-        }
-
+    }
+.print-card {
+    position: relative;
+    overflow: hidden;
+    background-color: #1a1a1a;
+    border: 1px solid var(--color-border);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+.print-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent);
+}
+.print-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 133.33%;
+    overflow: hidden;
+    background-color: #000;
+}
+.print-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.print-card:hover .print-image {
+    transform: scale(1.05);
+}
+.print-title-wrapper {
+    padding: 1.5rem;
+    text-align: center;
+}
+.print-title {
+    font-size: 1.3em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 0;
+}
 footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-end;
-    gap: 20px;
+    align-items: center;
+    gap: 1rem;
     background-color: #111111;
     padding: 1rem;
     border-top: 1px solid #333;
     margin-top: 25px;
 }
+footer p, footer a{
+    line-height: 1;
+}
 
-footer p { font-size: 0.8em; }
-footer a { font-size: 2em; font-weight: 600; }
+footer p { 
+    font-size: 0.8em; 
+    margin: 0;
+}
+footer a { 
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: 600;
+}
+#wwm {
+    font-size: clamp(0.8rem, 2.2vw, 0.9rem)
+}
 .scroll-spacer {
     height: 100vh;
+}
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+#lightbox.active {
+  display: flex;
+}
+
+#lb-image {
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+}
+
+#lb-close,
+#lb-prev,
+#lb-next {
+  position: absolute;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+#lb-close { top: 20px; right: 30px; }
+#lb-prev { left: 30px; }
+#lb-next { right: 30px; }
+#lb-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+#lb-title:hover {
+  opacity: 1;
 }

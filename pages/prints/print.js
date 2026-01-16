@@ -1,28 +1,28 @@
 const prints = {
   "left-2-sink": {
     title: "Left to Sink",
-    image: "../../images/Sunken Boat-1.jpg",
+    image: "../../images/-home/Sunken Boat-1.jpg",
     description: "Left 2 Sink includes two boats in which one is half way under the water. Which makes you wonder... Why was the boat just left like this?",
     sizes: { S: "16.5 x 11.8in", M: "23.4 x 16.7in", L: "27.6 x 19.7in" },
     prices: { S: 45, M: 65, L: 95 }
   },
   "titan-in-the-mist": {
     title: "Titan In The Mist",
-    image: "../../images/airport-5.jpg",
+    image: "../../images/-home/airport-5.jpg",
     description: "Titan in the mist is a powerful photo which shows an emirates plane just taking off. Showing contrast in size compared to the worker positioned below.",
     sizes: { S: "16.5 x 11in", M: "23.4 x 15.6in", L: "27.6 x 18.4in" },
     prices: { S: 45, M: 65, L: 95 }
   },
   "passing-time": {
     title: "Passing Time",
-    image: "../../images/Steam Train.jpg",
+    image: "../../images/-home/Steam Train.jpg",
     description: "This image shows a passing steam train making its way through what looks like an abandoned station. The cool blue tones help to create a really moody subject.",
     sizes: { S: "16.5 x 13.2in", M: "23.4 x 18.7in", L: "27.6 x 22.1in" },
     prices: { S: 45, M: 65, L: 95 }
   },
   "measured-silence": {
     title: "Measured Silence",
-    image: "../../images/Cheetah.jpg",
+    image: "../../images/-home/Cheetah.jpg",
     description: "This image shows a cheetah staring down the camera lens. No matter where I moved the cheetah wouldn't take its eyes off me.",
     sizes: { S: "13.2 x 16.5in", M: "18.7 x 23.4in", L: "22.1 x 27.6in" },
     prices: { S: 45, M: 65, L: 95 }

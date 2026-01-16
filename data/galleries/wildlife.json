@@ -1,0 +1,18 @@
+{
+  "title": "Wildlife",
+  "slug": "wildlife",
+  "images": [
+    {
+      "src": "../../images/wildlife/cheetah.jpg",
+      "title": "Measured Silence"
+    },
+    {
+      "src": "../../images/wildlife/eagle.jpg",
+      "title": "Sky Hunter"
+    },
+    {
+      "src": "../../images/wildlife/fox.jpg",
+      "title": "Still Watching"
+    }
+  ]
+}

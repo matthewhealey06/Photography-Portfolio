@@ -22,3 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+let targetY = window.scrollY;
+let currentY = window.scrollY;
+
+function smoothScroll() {
+  currentY += (targetY - currentY) * 0.1; // easing factor
+  window.scrollTo(0, currentY);
+  requestAnimationFrame(smoothScroll);
+}
+
+window.addEventListener("wheel", e => {
+  targetY += e.deltaY;
+  targetY = Math.max(0, Math.min(targetY, document.body.scrollHeight - window.innerHeight));
+  e.preventDefault();
+}, { passive: false });
+
+smoothScroll();
