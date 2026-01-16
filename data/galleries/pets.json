@@ -1,0 +1,47 @@
+
+{
+"title": "Pets",
+  "slug": "pets",
+  "images": [
+    {
+      "src": "../../images/pets/515A6682.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/515A6689.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/515A6697.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/515A6714.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/515A6780.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/515A6861.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/Dog-6.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/Duke-3.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/Peru (1 of 2).jpg",
+      "title": ""
+    },
+    {
+      "src": "../../images/pets/Peru (2 of 2).jpg",
+      "title": ""
+    }
+  ]
+}

@@ -69,3 +69,20 @@ document.getElementById("lb-next").onclick = () => {
   currentIndex = (currentIndex + 1) % images.length;
   openLightbox();
 };
+window.addEventListener("keydown", e => {
+  if (!lightbox.classList.contains("active")) return;
+
+  if (e.key === "ArrowRight") {
+    currentIndex = (currentIndex + 1) % images.length;
+    openLightbox();
+  }
+
+  if (e.key === "ArrowLeft") {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    openLightbox();
+  }
+
+  if (e.key === "Escape") {
+    closeLightbox();
+  }
+});
