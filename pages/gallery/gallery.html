@@ -7,23 +7,27 @@
 </head>
 
 <body>
+    <nav>
+        <h2><a href="index.html" class="active">Portfolio</a></h2>
+        <h2><a href="pages/Adventures/adventures.html" class="active">Adventures</a></h2>
+        <h2><a href="pages/about/about.html" class="active">About</a></h2>
+    </nav>
+    <header>
+    <h1 id="gallery-title"></h1>
+    </header>
 
-<header>
-  <h1 id="gallery-title"></h1>
-</header>
+    <main id="gallery-grid"></main>
 
-<main id="gallery-grid"></main>
+    <!-- Fullscreen Lightbox -->
+    <div id="lightbox" aria-hidden="true">
+    <img id="lb-image" alt="">
+    <a id="lb-title" href=""></a>
 
-<!-- Fullscreen Lightbox -->
-<div id="lightbox" aria-hidden="true">
-  <img id="lb-image" alt="">
-  <a id="lb-title" href=""></a>
+    <button id="lb-close">×</button>
+    <button id="lb-prev">‹</button>
+    <button id="lb-next">›</button>
+    </div>
 
-  <button id="lb-close">×</button>
-  <button id="lb-prev">‹</button>
-  <button id="lb-next">›</button>
-</div>
-
-<script src="gallery.js"></script>
+    <script src="gallery.js"></script>
 </body>
 </html>
