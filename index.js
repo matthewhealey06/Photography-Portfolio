@@ -302,19 +302,26 @@ containers.forEach((container, index) => {
 function openLightbox() {
   const container = containers[currentIndex];
 
-  // Set the full-size image
+  // Image
   lbImg.src = container.dataset.full;
-
-  // Set the title text
   lbTitle.textContent = container.dataset.title;
 
-  // ✅ Set the link dynamically using data-gallery
-  lbTitle.href = `/pages/gallery/gallery.html?gallery=${container.dataset.gallery}`;
+  // LINK LOGIC (THIS IS THE IMPORTANT PART)
+  if (container.dataset.link) {
+    // Dedicated page
+    lbTitle.href = container.dataset.link;
+  } else if (container.dataset.gallery) {
+    // Shared gallery page
+    lbTitle.href = `/pages/gallery/gallery.html?gallery=${container.dataset.gallery}`;
+  } else {
+    // Safety fallback (no navigation)
+    lbTitle.removeAttribute('href');
+  }
 
-  // Show lightbox
   lightbox.classList.add('active');
   freezeVerticalScroll();
 }
+
 
 function closeLightbox() {
   lightbox.classList.remove('active');
