@@ -53,10 +53,9 @@ nav a.active {
 nav {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
-    
     display: flex;
     gap: 50px;
     align-items: center;
@@ -73,7 +72,7 @@ body {
 }
 #lb-close {
     position: fixed;
-    top: 20px;
+    top: 25px;
     right: 25px;
     font-size: 40px;
     color: white;
