@@ -25,9 +25,9 @@ body.loading {
 }
 
 /* Hide content initially */
-#content {
+/* #content {
   visibility: hidden;
-}
+} */
 /*---------------------------------- */
 html, body {
     margin: 0;
