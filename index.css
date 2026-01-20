@@ -25,9 +25,10 @@ body.loading {
 }
 
 /* Hide content initially */
-#content {
+/*#content {
   visibility: hidden;
-}
+}*/
+
 /*---------------------------------- */
 html, body {
     margin: 0;
@@ -187,8 +188,8 @@ nav {
 
 @media (max-width:700px){
     .image-container{
-        height: 30vh;
-        width: 40vw;
+        height: 38vh;
+        width: 48vw;
     }
     .image-container .image{
         object-position: 75% center;
