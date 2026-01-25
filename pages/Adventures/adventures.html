@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adventures</title>
     <link rel="stylesheet" href="adventures.css">
+    <link rel="preload" as="image" href="/images/wildlife/Deer-4.png">
+
 </head>
 <body>
 <main id="content">
@@ -17,32 +19,26 @@
         <section class="v-carousel">
             <a class="card active" href="tatton park/tatton-park.html" aria-label="Tatton Park">
                 <div class="card-wrapper">
-                    <img src="/images/wildlife/Deer-4.png" alt="Tatton Park wildlife photography">
+                    <img src="/images/wildlife/Deer-4.png" loading="eager" fetchpriority="high" decoding="async" alt="Tatton Park wildlife photography">
                     <div class="card-title">Tatton Park</div>
                 </div>
             </a>
 
             <a class="card" href="west midlands safari park/wmsp.html" aria-label="West Midlands Safari Park">
                 <div class="card-wrapper">
-                    <img src="/images/wildlife/Animal-2.jpg" alt="West Midlands Safari Park wildlife photography">
+                    <img src="/images/wildlife/Animal-2.jpg" loading="lazy" fetchpriority="low" decoding="async" alt="West Midlands Safari Park wildlife photography">
                     <div class="card-title">West Midlands Safari Park</div>
                 </div>
             </a>
 
             <a class="card" href="peru/peru.html" aria-label="Peru">
                 <div class="card-wrapper">
-                    <img src="/images/portraits/Peru Portrait (2 of 2).jpg" alt="Peru portrait photography">
+                    <img src="/images/portraits/Peru Portrait (2 of 2).jpg" loading="lazy" fetchpriority="low" decoding="async" alt="Peru portrait photography">
                     <div class="card-title">Peru</div>
                 </div>
             </a>
         </section>
     </main>
-    <footer>
-        <p>© 2026 by Matthew Healey.</p>
-        <a href="https://www.instagram.com/matthewhealey/" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="https://www.youtube.com/@matthewhealey" target="_blank" rel="noopener noreferrer">YouTube</a>
-        <a id="wwm" href="">Work With Me!</a>
-    </footer>
 
     <script src="adventures.js"></script>
 </body>
