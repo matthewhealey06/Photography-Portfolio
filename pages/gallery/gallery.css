@@ -131,3 +131,8 @@ footer a {
 #wwm {
     font-size: clamp(0.8rem, 2.2vw, 0.9rem)
 }
+@media(max-width:1000px){
+    #gallery-grid{
+        column-count: 2;
+    }
+}

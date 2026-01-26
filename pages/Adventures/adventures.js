@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { passive: false }
         );
 
-        // Keyboard navigation
+// Keyboard navigation
         window.addEventListener('keydown', e => {
             if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
                 e.preventDefault();
@@ -98,3 +98,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 navigateCarousel('prev');
             }
         });
+
+        // Touch navigation
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const MIN_SWIPE_DISTANCE = 50;
+
+        window.addEventListener('touchstart', e => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchend', e => {
+            touchEndY = e.changedTouches[0].clientY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeDistance = touchStartY - touchEndY;
+            
+            if (Math.abs(swipeDistance) < MIN_SWIPE_DISTANCE) return;
+            
+            if (swipeDistance > 0) {
+                // Swiped up - go to next
+                navigateCarousel('next');
+            } else {
+                // Swiped down - go to previous
+                navigateCarousel('prev');
+            }
+        }

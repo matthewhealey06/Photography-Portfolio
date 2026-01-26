@@ -44,3 +44,20 @@ h2{
     text-align: center;
     font-size: 1.1em;
 }
+@media(max-width:1000px){
+    .adventure-info{
+        flex-direction: column;
+    }
+    .left, .right{
+        width: 100%;
+        margin-left: 0;
+    }
+    .right p{
+        width: 90%;
+        font-size: 2em;
+    }
+    .right h2{
+        font-size: 3em;
+        margin: 100px 0 50px 0;
+    }
+}
