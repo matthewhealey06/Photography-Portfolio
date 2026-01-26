@@ -7,12 +7,6 @@ const CONFIG = {
         SMALL_SCREEN_OFFSET: 10,
         TOUCH_ZONE: 200 // pixels above/below image to allow drag on mobile
     },
-    SCROLL: {
-        SPEED: 0.05,
-        HERO_BOTTOM_OFFSET: 0,
-        SECTION_TOP_OFFSET: -50,
-        LOCK_RELEASE_DELAY_MS: 400
-    },
     DRAG: {
         MOUSE_DIVISOR: 2,
         TOUCH_DIVISOR: 1,
@@ -26,19 +20,6 @@ const CONFIG = {
         INTERVAL: 6000
     }
 };
-
-// =====================================================
-// Helper Functions for Vertical Lock
-// =====================================================
-function freezeVerticalScroll() {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-}
-
-function unfreezeVerticalScroll() {
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-}
 
 // =====================================================
 // Hero Slider
@@ -115,63 +96,6 @@ function applyTransform(percent) {
 }
 
 applyTransform(CONFIG.TRACK.START_PERCENT);
-
-// =====================================================
-// Direction-Aware Wheel Scroll with Vertical Lock
-// =====================================================
-window.addEventListener("wheel", e => {
-    const heroRect = heroSection.getBoundingClientRect();
-    const horizontalSection = document.querySelector('.horizontal-scroll');
-    const horizontalRect = horizontalSection.getBoundingClientRect();
-
-    let shouldActivate = false;
-
-    if (e.deltaY > 0) {
-        const heroPastThreshold = heroRect.bottom <= CONFIG.SCROLL.HERO_BOTTOM_OFFSET;
-        const horizontalVisible = horizontalRect.top < window.innerHeight && horizontalRect.bottom > 0;
-        shouldActivate = heroPastThreshold && horizontalVisible;
-    } else {
-        const heroPastThreshold = heroRect.bottom <= CONFIG.SCROLL.HERO_BOTTOM_OFFSET;
-        const sectionFarEnoughDown = horizontalRect.top >= CONFIG.SCROLL.SECTION_TOP_OFFSET;
-        const horizontalVisible = horizontalRect.top < window.innerHeight && horizontalRect.bottom > 0;
-    shouldActivate =
-        heroPastThreshold &&
-        horizontalVisible &&
-        (isHorizontalActive || sectionFarEnoughDown);
-    }
-
-    if (isHorizontalActive) shouldActivate = true;
-
-    if (!shouldActivate) {
-        isHorizontalActive = false;
-        unfreezeVerticalScroll();
-        return;
-    }
-
-    const next = currentPercent + -e.deltaY * CONFIG.SCROLL.SPEED;
-
-    if (
-        (e.deltaY > 0 && currentPercent > CONFIG.TRACK.END_PERCENT) ||
-        (e.deltaY < 0 && currentPercent < CONFIG.TRACK.START_PERCENT)
-    ) {
-        e.preventDefault();
-        isHorizontalActive = true;
-        freezeVerticalScroll();
-
-        if (scrollLockTimeout) clearTimeout(scrollLockTimeout);
-
-        scrollLockTimeout = setTimeout(() => {
-            isHorizontalActive = false;
-            unfreezeVerticalScroll();
-        }, CONFIG.SCROLL.LOCK_RELEASE_DELAY_MS);
-
-        applyTransform(clamp(next, CONFIG.TRACK.END_PERCENT, CONFIG.TRACK.START_PERCENT));
-    } else {
-        isHorizontalActive = false;
-        unfreezeVerticalScroll();
-    }
-}, { passive: false });
-
 // =====================================================
 // Mouse Drag
 // =====================================================
