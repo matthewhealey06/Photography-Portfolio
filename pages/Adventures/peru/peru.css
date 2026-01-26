@@ -2,6 +2,8 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 3em;
+    margin: 150px 0 75px 0;
 }
 .left{
     width: 50%;
@@ -35,7 +37,7 @@ h2{
     position: relative;
     justify-content: center;
     align-items: center;
-    width: 350px;
+    width: 45%;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 50px;

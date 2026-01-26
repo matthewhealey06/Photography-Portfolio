@@ -1,0 +1,46 @@
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    margin: 150px 0 75px 0;
+}
+.left{
+    width: 50%;
+}
+.left img{
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid #ffffff 1px;
+}
+.adventure-info{
+    display: flex;
+    margin-bottom: 100px;
+    border: solid #ffffff 1px;
+}
+.right{
+    margin-left: 25px;
+    margin-top: 50px;
+    width: 50%;
+}
+h2{
+    font-weight: 100;
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+}
+.right p{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 50px;
+    text-align: center;
+    font-size: 1.1em;
+}
