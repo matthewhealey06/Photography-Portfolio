@@ -1,0 +1,30 @@
+{
+"title": "West Midlands Safari Park",
+  "slug": "west-midlands",
+  "images": [
+    {
+      "src": "../../../images/wildlife/animal-2.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/wildlife/animal-13.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/wildlife/animal-22.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/wildlife/animal-24.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/wildlife/animal-31.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/wildlife/Cheetah.jpg",
+      "title": ""
+    }
+  ]
+}
