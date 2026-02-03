@@ -1,0 +1,34 @@
+{
+"title": "Travel",
+  "slug": "travel",
+  "images": [
+    {
+      "src": "../../../images/travel/Peru (1 of 5).jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/travel/Peru (2 of 5).jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/travel/Peru (3 of 5).jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/travel/Peru (4 of 5).jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/-home/Sunken Boat-1.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/-home/Alley Horizontal.jpg",
+      "title": ""
+    },
+    {
+      "src": "../../../images/-home/Steam Train.jpg",
+      "title": ""
+    }
+  ]
+}
