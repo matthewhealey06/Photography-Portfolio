@@ -27,7 +27,7 @@ const prints = {
     title: "Red Panda",
     image: "../../images/-home/Animal-24.jpg",
     description: "Description Coming Soon",
-    sizes: { S: "16.5 x 13.2in", M: "23.4 x 18.7in", L: "27.6 x 22.1in" },
+    sizes: { S: "16.5 x 11in", M: "23.4 x 15.6in", L: "27.6 x 18.4in" },
     prices: { S: 45, M: 65, L: 95 },
     stripeLinks: {
       S: "https://buy.stripe.com/fZucN426o8tyeWD7tU8Ra06",
