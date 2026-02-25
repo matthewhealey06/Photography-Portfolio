@@ -115,29 +115,3 @@ button {
         max-width: 100%;
     }
 }
-footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    background-color: #111111;
-    padding: 1rem;
-    border-top: 1px solid #333;
-    margin-top: 25px;
-}
-footer p, footer a{
-    line-height: 1;
-}
-
-footer p { 
-    font-size: 0.8em; 
-    margin: 0;
-}
-footer a { 
-    font-size: clamp(1rem, 4vw, 1.5rem);
-    font-weight: 600;
-}
-#wwm {
-    font-size: clamp(0.8rem, 2.2vw, 0.9rem)
-}
