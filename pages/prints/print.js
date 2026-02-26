@@ -118,14 +118,24 @@ renderPrint(id);
 
 let currentIndex = printOrder.indexOf(id);
 
+function navigateToPrint(printId) {
+  const newUrl = `${window.location.pathname}?id=${printId}`;
+  history.pushState({ id: printId }, '', newUrl);
+  renderPrint(printId);
+}
+
 prevBtn.onclick = () => {
   currentIndex = (currentIndex - 1 + printOrder.length) % printOrder.length;
-  currentPrintId = printOrder[currentIndex];
-  window.location.search = `?id=${currentPrintId}`;
+  navigateToPrint(printOrder[currentIndex]);
 };
 
 nextBtn.onclick = () => {
   currentIndex = (currentIndex + 1) % printOrder.length;
-  currentPrintId = printOrder[currentIndex];
-  window.location.search = `?id=${currentPrintId}`;
+  navigateToPrint(printOrder[currentIndex]);
 };
+
+window.addEventListener('popstate', (e) => {
+  const printId = e.state?.id || printOrder[0];
+  currentIndex = printOrder.indexOf(printId);
+  renderPrint(printId);
+});
