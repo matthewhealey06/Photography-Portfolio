@@ -262,9 +262,6 @@ body.loading {
     letter-spacing: 1px;
     margin: 0;
 }
-#wwm {
-    font-size: clamp(0.8rem, 2.2vw, 0.9rem)
-}
 .scroll-spacer {
     height: 100vh;
 }
