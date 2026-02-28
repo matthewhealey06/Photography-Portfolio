@@ -11,7 +11,9 @@ h1{
     justify-content: center; 
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    margin: 20px 20px 20px 20px
+    width: 75%;
+    max-width: 700px;
+    margin: 0 auto;
 }
 input, textarea{
     background-color: #2d2d2d;
@@ -54,7 +56,7 @@ textarea{
     width: 400px;
     height: 75px;
     font-weight: 700;
-    font-size: 1.5em;
+    font-size: 1.1em;
     color: #ffffff;
     cursor: pointer;
 }
