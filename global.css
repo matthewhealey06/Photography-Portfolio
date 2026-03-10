@@ -36,6 +36,9 @@ nav {
 nav a {
     opacity: 0.5;
     transition: opacity 0.3s ease;
+    text-decoration: none;
+    font-size: 1.5em;
+    padding-top: 10px;
 }
 
 nav a.active {
