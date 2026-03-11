@@ -8,7 +8,11 @@ html, body {
     scrollbar-width: none;
     scroll-behavior: smooth;
 }
-
+body{
+    display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 100vh;
+}
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
     display: none;
