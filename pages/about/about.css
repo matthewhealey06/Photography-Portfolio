@@ -1,19 +1,62 @@
-main {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    grid-auto-flow: row;
-    row-gap: 20vh;
+/* -- Page wrapper -- */
+.page {
+    position: relative;
 }
-.section1 {
-    font-size: clamp(1.5rem, 2.5vw, 5rem);
-    display: flex;
-    padding: 0 5vw;
-    grid-column: 2;
+
+/* -- Main content: pushed right -- */
+.main-col {
+    padding-left: 45vw;
+    padding-right: 5vw;
+}
+
+.section {
+    font-size: clamp(1.5rem, 2.8vw, 3rem);
+    line-height: 1.4;
+}
+
+#section1 {
     margin-top: 20vh;
 }
-.section2 {
-    font-size: clamp(1.5rem, 2.5vw, 5rem);
-    display: flex;
-    padding: 0 5vw;
-    grid-column: 2
+
+#section2, #section3, #section4, #section5 {
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+}
+#section3 {
+    margin-top: 20vh;
+}
+
+/* -- Minimap -- */
+.minimap {
+    position: fixed;
+    left: 5vw;
+    top: 30vh;
+    pointer-events: none;
+}
+
+.minimap-inner {
+    transform-origin: top left;
+    opacity: 0.5;
+}
+
+/* -- Viewport box -- */
+.minimap-viewport {
+    position: fixed;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: top 0.12s ease-out, height 0.12s ease-out;
+    z-index: 50;
+    padding-bottom: 50px;
+}
+
+/* -- Responsive -- */
+@media (max-width: 768px) {
+    .main-col {
+        padding-left: 5vw;
+    }
+
+    .minimap,
+    .minimap-viewport {
+        display: none;
+    }
 }
