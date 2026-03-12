@@ -12,19 +12,19 @@
 .section {
     font-size: clamp(1.5rem, 2.8vw, 3rem);
     line-height: 1.4;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
 }
 
 #section1 {
     margin-top: 20vh;
+    font-size: clamp(1.5rem, 2.8vw, 3rem);
+    line-height: 1.4;
 }
 
-#section2, #section3, #section4, #section5 {
-    margin-top: 20vh;
-    margin-bottom: 20vh;
-}
-#section3 {
-    margin-top: 20vh;
-}
+#yawningLion{
+    max-width: 600px;
+height: auto;}
 
 /* -- Minimap -- */
 .minimap {
