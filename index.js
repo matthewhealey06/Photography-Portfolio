@@ -69,7 +69,7 @@ let currentPercent = CONFIG.TRACK.START_PERCENT;
 let isDragging = false;
 let dragStartX = 0;
 let dragStartPercent = 0;
-let isHorizontalActive = false; // Track if horizontal scroll is currently active
+let isHorizontalActive = false;
 let scrollLockTimeout = null;
 
 function clamp(val, min, max) {
@@ -207,15 +207,11 @@ function openLightbox() {
   lbImg.src = container.dataset.full;
   lbTitle.textContent = container.dataset.title;
 
-  // LINK LOGIC (THIS IS THE IMPORTANT PART)
   if (container.dataset.link) {
-    // Dedicated page
     lbTitle.href = container.dataset.link;
   } else if (container.dataset.gallery) {
-    // Shared gallery page
     lbTitle.href = `/pages/gallery/gallery.html?gallery=${container.dataset.gallery}`;
   } else {
-    // Safety fallback (no navigation)
     lbTitle.removeAttribute('href');
   }
 
@@ -245,7 +241,6 @@ document.getElementById('lb-close').onclick = closeLightbox;
 document.getElementById('lb-next').onclick = nextImage;
 document.getElementById('lb-prev').onclick = prevImage;
 
-// Keyboard navigation
 window.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('active')) return;
   if (e.key === 'Escape') closeLightbox();

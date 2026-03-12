@@ -47,16 +47,15 @@ height: auto;}
     transition: top 0.12s ease-out, height 0.12s ease-out;
     z-index: 50;
     padding-bottom: 50px;
+    margin-left: 20px;
 }
 
-/* -- Responsive -- */
-@media (max-width: 768px) {
-    .main-col {
-        padding-left: 5vw;
-    }
 
-    .minimap,
-    .minimap-viewport {
+@media (max-width:1075px) {
+    .minimap-viewport, .minimap{
         display: none;
+    }
+    .main-col {
+        padding-left: 10vw;
     }
 }

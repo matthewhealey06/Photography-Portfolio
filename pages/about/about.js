@@ -18,10 +18,6 @@ function buildMinimap() {
         if (i === 0) s.style.marginTop = '0';
     });
 
-    // Also kill the default p margin on the first paragraph
-    // const firstP = clone.querySelector('p');
-    // if (firstP) firstP.style.marginTop = '0';
-
     minimapInner.innerHTML = '';
     minimapInner.appendChild(clone);
 
@@ -45,13 +41,11 @@ function updateViewport() {
     const scrollY = window.scrollY;
     const minimapHeight = minimap.offsetHeight;
 
-    // Scroll progress 0 to 1
     const scrollFraction = docHeight > viewHeight
         ? scrollY / (docHeight - viewHeight)
         : 0;
 
-    // Slide the minimap up as we scroll so all content is revealed by the end
-    const minimapOverflow = minimapHeight - (viewHeight * .4); // 0.55 accounts for the top: 30vh offset
+    const minimapOverflow = minimapHeight - (viewHeight * .4);
     if (minimapOverflow > 0) {
         minimap.style.transform = `translateY(${-scrollFraction * minimapOverflow}px)`;
     }
@@ -68,7 +62,6 @@ function updateViewport() {
     viewport.style.height = vpHeight + 'px';
 }
 
-// Build on load and resize
 buildMinimap();
 updateViewport();
 

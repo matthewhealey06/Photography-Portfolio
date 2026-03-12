@@ -6,19 +6,17 @@ const content = document.getElementById("content");
 
 let progress = 0;
 
-// If loader already shown in this tab, skip it
 if (sessionStorage.getItem("loaderShown")) {
   loader.remove();
   content.style.visibility = "visible";
   document.body.classList.remove("loading");
 } else {
-  // Mark loader as shown
   sessionStorage.setItem("loaderShown", "true");
 
   // Fake progress loop
   const fakeInterval = setInterval(() => {
     if (progress < 90) {
-      progress += Math.random() * 3; // organic increment
+      progress += Math.random() * 3;
       progress = Math.floor(progress);
       percentEl.textContent = `${progress}%`;
     }
