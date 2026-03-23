@@ -74,3 +74,11 @@ footer a {
 #wwm {
     font-size: clamp(0.8rem, 2.2vw, 0.9rem)
 }
+.policies{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.document{
+    font-size: 0.75em;
+}
