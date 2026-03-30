@@ -28,4 +28,4 @@ Personal photography portfolio showcasing wildlife, portraits, travel, automotiv
 - Stripe (print purchases)
 
 ## Live Demo
-matthewhealeyphotography.com
+[matthewhealeyphotography.com](https://matthewhealeyphotography.com)
