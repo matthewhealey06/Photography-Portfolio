@@ -153,8 +153,12 @@ body.loading {
     top: 45%;
     transform: translate(-7%, -55%);
     will-change: transform;
+    cursor: grab;
+    user-select: none;
 }
-
+#imageTrack:active{
+    cursor: grabbing;
+}
 
 @media (max-width:700px){
     .image-container{
